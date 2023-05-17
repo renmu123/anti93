@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicons/favicon.jpg"
+    />
+    <script src="/assets/catLang.js"></script>
+    <script src="/assets/base64.js"></script>
+    <link href="style.css" rel="stylesheet" />
+    <title>93anti</title>
+    <meta name="description" content="What if ChatGPT were cheese?" />
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="header">
+        <h1>我为93发癫</h1>
+        <p>不会有人为93发癫，不会吧，不会吧。</p>
+      </div>
+      <div id="chatcontainer">
+        <div id="chat"></div>
+        <div id="input-area">
+          <button class="fa-paper-plane send-btn">开始发癫</button>
+          <!-- <div id="input-container">
+            <form id="form">
+              <input
+                type="text"
+                placeholder="Type your message here"
+                id="user-input"
+                autocomplete="off"
+              />
+            </form>
+            <svg
+              t="1680503398213"
+              class="icon fa-paper-plane"
+              viewBox="0 0 1024 1024"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              p-id="1460"
+              width="30"
+              height="30"
+            >
+              <path
+                d="M981.333333 72.533333l-132.266666 699.733334c0 25.6-12.8 46.933333-29.866667 59.733333-4.266667 4.266667-12.8 4.266667-21.333333 4.266667s-17.066667 0-21.333334-4.266667L469.333333 725.333333l298.666667-469.333333-384 426.666667-311.466667-102.4c-21.333333-8.533333-29.866667-21.333333-29.866666-38.4 0-21.333333 21.333333-34.133333 29.866666-38.4L887.466667 64c21.333333-17.066667 42.666667-21.333333 68.266666-17.066667 8.533333 4.266667 17.066667 8.533333 21.333334 17.066667 4.266667 0 4.266667 4.266667 4.266666 8.533333zM473.6 934.4c-4.266667-4.266667-4.266667-8.533333-4.266667-12.8v-132.266667c0-4.266667 4.266667-8.533333 8.533334-12.8 4.266667-4.266667 8.533333-4.266667 12.8-4.266666l93.866666 25.6c4.266667 0 8.533333 4.266667 12.8 12.8 0 4.266667 0 12.8-4.266666 17.066666l-93.866667 106.666667c-8.533333 4.266667-17.066667 8.533333-25.6 0z"
+                p-id="1461"
+                fill="#ececf1"
+              ></path>
+            </svg>
+          </div> -->
+          <p class="disclaimer">
+            这个站点由
+            <a href="https://space.bilibili.com/10995238" target="_blank"
+              >暮色312</a
+            >
+            实现。
+            <a href="#" onclick="handleInfoClick" id="infoBtn"
+              >点击查看更多信息</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+          <div style="display: flex">
+            <input type="text" class="modal-input" placeholder="请输入糕语" />
+            <button class="modal-btn">翻译成人话</button>
+          </div>
+          <div style="display: flex; margin-top: 20px">
+            <input type="text" class="modal-input-2" placeholder="请输入人话" />
+            <button class="modal-btn-2">翻译成糕语</button>
+          </div>
+          <p class="modal-output"></p>
+          <button class="copy-btn" style="display: none">复制</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      // Get the modal
+      var modal = document.querySelector(".modal");
+      // Get the button that opens the modal
+      var btn = document.querySelector(".translate-btn");
+      // Get the <span> element that closes the modal
+      var span = document.querySelector(".close");
+      // When the user clicks the button, open the modal
+      // btn.onclick = function () {
+      //   modal.style.display = "block";
+      // };
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function () {
+        modal.style.display = "none";
+      };
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+
+      const translateBtn = document.querySelector(".modal-btn");
+      const copyBtn = document.querySelector(".copy-btn");
+
+      translateBtn.addEventListener("click", () => {
+        const input = document.querySelector(".modal-input");
+        const output = document.querySelector(".modal-output");
+        const text = input.value;
+        if (text === "") {
+          output.innerHTML = "你还没有输入糕语喵";
+          copyBtn.style.display = "none";
+
+          return;
+        }
+        if (Miao.isMiao(text)) {
+          const meows = Miao.decode(text);
+          output.innerHTML = meows;
+          copyBtn.style.display = "block";
+        } else {
+          output.innerHTML = "你输入的不是糕语喵";
+          copyBtn.style.display = "none";
+        }
+      });
+
+      const translateBtn2 = document.querySelector(".modal-btn-2");
+
+      translateBtn2.addEventListener("click", () => {
+        const input = document.querySelector(".modal-input-2");
+        const output = document.querySelector(".modal-output");
+        const text = input.value;
+        if (text === "") {
+          output.innerHTML = "你还没有输入人话";
+          copyBtn.style.display = "none";
+
+          return;
+        }
+        const meows = Miao.encode(text, { calls: "嘎" });
+        output.innerHTML = meows;
+        copyBtn.style.display = "block";
+      });
+
+      copyBtn.addEventListener("click", () => {
+        const output = document.querySelector(".modal-output");
+        const text = output.innerHTML;
+        if (text === "") {
+          return;
+        }
+        const input = document.createElement("input");
+        input.value = text;
+        document.body.appendChild(input);
+        input.select();
+        if (document.execCommand("copy")) {
+          document.execCommand("copy");
+          alert("复制成功");
+        }
+        document.body.removeChild(input);
+      });
+    </script>
+
+    <script>
+      // const userInput = document.getElementById("user-input");
+      const chatArea = document.getElementById("chat");
+      const sendBtn = document.querySelector(".fa-paper-plane");
+      const form = document.getElementById("form");
+      const infoBtn = document.getElementById("infoBtn");
+
+      let data;
+      fetch("data.json")
+        .then((response) => response.json())
+        .then((jsonData) => {
+          data = jsonData;
+        });
+
+      function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+      }
+
+      function handleSubmit(event) {
+        event.preventDefault(); // Prevent refresh on form submission
+
+        // If a user submits input, create a new bubble-containter and bubble to show the user input in the chat
+        // if (userInput.value !== "") {
+        // let userString = userInput.value;
+
+        let newBubbleContainer = document.createElement("div");
+        newBubbleContainer.classList.add(
+          "chat-bubble-container",
+          "user-bubble-container"
+        );
+        newBubbleContainer.innerHTML =
+          '<div class="profile-picture"><img src="/images/user.png" height="100%" /></div>';
+
+        let newBubble = document.createElement("div");
+        newBubble.classList.add("chat-bubble", "user-bubble");
+        // newBubble.innerHTML = userInput.value;
+        newBubbleContainer.appendChild(newBubble);
+        // chatArea.appendChild(newBubbleContainer);
+        // userInput.value = ""; // Clear the input vield
+
+        const randomInt = getRandomInt(data.length);
+        const meows = data[randomInt].text.replaceAll("{name}", "93");
+        // const meows = Miao.encode(data[randomInt].text, { calls: "嘎" });
+        const file = data[randomInt].file;
+
+        let newBubble2Container = document.createElement("div");
+        newBubble2Container.classList.add(
+          "chat-bubble-container",
+          "chat-gpt-bubble-container"
+        );
+        newBubble2Container.innerHTML =
+          '<div class="profile-picture"><img src="/images/avatar.jpg" height="100%" /></div>';
+
+        let newBubble2 = document.createElement("div");
+        newBubble2.classList.add("chat-bubble", "chat-gpt-bubble");
+        newBubble2.innerHTML = "...."; // At first, only show an ellipsis
+        newBubble2Container.appendChild(newBubble2);
+        chatArea.appendChild(newBubble2Container);
+        window.scrollTo(0, document.documentElement.scrollHeight);
+        let currentMeow = 0;
+
+        let meowLoop = setInterval(() => {
+          // Interval to show more of the reply every 100 milliseconds (simulating typing behaviour)
+          if (currentMeow < meows.length) {
+            currentMeow += Math.floor(Math.random() * 10); // Show between 0 and 10 more characters
+            newBubble2.innerHTML = meows.slice(0, currentMeow) + "█"; // While typing, end the string with a block character
+          } else {
+            newBubble2.innerHTML = meows; // When finished, put the entire response in the bubble, without block character
+            clearInterval(meowLoop);
+
+            // if (file.endsWith(".mp3")) {
+            //   const mediaContainer = document.createElement("div");
+            //   mediaContainer.classList.add("audio-container");
+            //   const audio = document.createElement("audio");
+            //   audio.src = file;
+            //   audio.controls = true;
+            //   mediaContainer.appendChild(audio);
+            //   newBubble2.appendChild(mediaContainer);
+            // } else if (file.includes("www.bilibili.com")) {
+            //   const mediaContainer = document.createElement("div");
+            //   mediaContainer.classList.add("audio-container");
+            //   const aEle = document.createElement("a");
+            //   aEle.href = file;
+            //   aEle.target = "_blank";
+            //   aEle.innerHTML = file;
+            //   // const audio = document.createElement("audio");
+            //   // audio.src = file;
+            //   // audio.controls = true;
+            //   mediaContainer.appendChild(aEle);
+            //   newBubble2.appendChild(mediaContainer);
+            // }
+            // userInput.focus(); // Focus the input again, so user can type a new response
+          }
+        }, 30);
+        // }
+      }
+      sendBtn.addEventListener("click", handleSubmit); // Handle clicks to the submit button
+      // form.addEventListener("submit", handleSubmit); // Handle default submit (e.g. pressing enter)
+
+      const infoText = [
+        "不会真的有人是93的gachi吧，不会吧，不会吧",
+        // "关注<a href='https://space.bilibili.com/3493139945884106' target='_blank'>雪糕</a>喵，关注<a href='https://space.bilibili.com/3493139945884106' target='_blank'>雪糕</a>谢谢喵！",
+        // "本项目纯属整活，如果有宝宝不懂糕语的，可以在右下角进行翻译哦",
+        // "大家也要关注我做的另一个雪糕麻麻的<a href='https://www.icheese.club/' target='_blank'>专属网页</a>喵，虽然还没做完",
+        // "大家可以关注这个<a href='https://github.com/renmu123/CheeseGPT/' target='_blank'>项目</a>，贡献更多逆天的雪糕麻麻",
+        // "也要关注<a href='https://space.bilibili.com/10995238' target='_blank'>暮色312</a>，之后会带来更多整活的",
+      ]; // Lines of the information chat
+
+      infoBtn.addEventListener("click", handleInfoClick); // Handle clicks to the info link
+
+      function handleInfoClick() {
+        // Create a chat-bubble-container
+
+        let newBubble3Container = document.createElement("div");
+        newBubble3Container.classList.add(
+          "chat-bubble-container",
+          "wouter-bubble-container"
+        );
+        newBubble3Container.innerHTML =
+          '<div class="profile-picture"><img src="/images/author.jpg" height="100%" /></div>';
+
+        function createLine(i) {
+          // Create each line seperately, one at a time
+          if (i < infoText.length) {
+            // Check if the line exists
+            let newBubble3 = document.createElement("div");
+            newBubble3.classList.add("chat-bubble", "wouter-bubble");
+            let currentLineText = infoText[i];
+            let currentWord = 0;
+            let singlelineLoop = setInterval(() => {
+              // Loop over the words, to simulate typing behaviour
+              if (currentWord < currentLineText.length) {
+                currentWord += Math.floor(Math.random() * 10) + 5; // Return between 5 and 15 characters
+                newBubble3.innerHTML =
+                  currentLineText.slice(0, currentWord) + "█"; // While typing, end the string with a block character
+              } else {
+                newBubble3.innerHTML = currentLineText; // When finished, put the entire response in the bubble, without block character
+                clearInterval(singlelineLoop);
+                window.scrollTo(0, document.documentElement.scrollHeight);
+                // userInput.focus(); // Focus the input again, so user can type a new response
+                createLine(i + 1); // Call this function again using i+1 so the next line is created
+              }
+            }, 80);
+
+            newBubble3Container.appendChild(newBubble3);
+            chatArea.appendChild(newBubble3Container);
+          }
+        }
+        createLine(0); // Start creating the respone with the first line
+      }
+
+      infoBtn.click(); // Simulate a click on the info button, to show the info text
+    </script>
+  </body>
+</html>
