@@ -243,27 +243,27 @@
             newBubble2.innerHTML = meows; // When finished, put the entire response in the bubble, without block character
             clearInterval(meowLoop);
 
-            // if (file.endsWith(".mp3")) {
-            //   const mediaContainer = document.createElement("div");
-            //   mediaContainer.classList.add("audio-container");
-            //   const audio = document.createElement("audio");
-            //   audio.src = file;
-            //   audio.controls = true;
-            //   mediaContainer.appendChild(audio);
-            //   newBubble2.appendChild(mediaContainer);
-            // } else if (file.includes("www.bilibili.com")) {
-            //   const mediaContainer = document.createElement("div");
-            //   mediaContainer.classList.add("audio-container");
-            //   const aEle = document.createElement("a");
-            //   aEle.href = file;
-            //   aEle.target = "_blank";
-            //   aEle.innerHTML = file;
-            //   // const audio = document.createElement("audio");
-            //   // audio.src = file;
-            //   // audio.controls = true;
-            //   mediaContainer.appendChild(aEle);
-            //   newBubble2.appendChild(mediaContainer);
-            // }
+            if (file.endsWith(".mp3")) {
+              const mediaContainer = document.createElement("div");
+              mediaContainer.classList.add("audio-container");
+              const audio = document.createElement("audio");
+              audio.src = file;
+              audio.controls = true;
+              mediaContainer.appendChild(audio);
+              newBubble2.appendChild(mediaContainer);
+            } else if (file.includes("www.bilibili.com")) {
+              const mediaContainer = document.createElement("div");
+              mediaContainer.classList.add("audio-container");
+              const aEle = document.createElement("a");
+              aEle.href = file;
+              aEle.target = "_blank";
+              aEle.innerHTML = file;
+              // const audio = document.createElement("audio");
+              // audio.src = file;
+              // audio.controls = true;
+              mediaContainer.appendChild(aEle);
+              newBubble2.appendChild(mediaContainer);
+            }
             // userInput.focus(); // Focus the input again, so user can type a new response
           }
         }, 200);
