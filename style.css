@@ -44,10 +44,32 @@ body {
   background-color: #343541;
   color: white;
   justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+.header::after {
+  content: "";
+  background: url("/images/flower.png") no-repeat center center;
+  background-size: contain;
+  height: 100px;
+  width: 100px;
+  position: absolute;
+  /* z-index: -1; */
+  right: -50px;
+  top: 0;
+  animation: rotate 1.5s linear infinite;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .header h1 {
-  font-size: 64px;
+  font-size: 50px;
   text-align: center;
   margin: 0;
 }
@@ -129,7 +151,7 @@ body {
   align-self: flex-start;
   color: #d1d5db;
   width: 75%;
-  padding: 1em 1em;
+  padding: 5px 1em;
   margin-left: 30px;
 }
 

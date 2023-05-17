@@ -23,8 +23,9 @@
   <body>
     <div id="container">
       <div class="header">
+        <!-- <div></div> -->
         <h1>我为93发癫</h1>
-        <p>不会有人为93发癫，不会吧，不会吧。真无语，滚啊</p>
+        <p>真无语，滚啊</p>
       </div>
       <div id="chatcontainer">
         <div id="chat"></div>
@@ -193,25 +194,29 @@
         // if (userInput.value !== "") {
         // let userString = userInput.value;
 
-        let newBubbleContainer = document.createElement("div");
-        newBubbleContainer.classList.add(
-          "chat-bubble-container",
-          "user-bubble-container"
-        );
-        newBubbleContainer.innerHTML =
-          '<div class="profile-picture"><img src="/images/user.png" height="100%" /></div>';
+        // let newBubbleContainer = document.createElement("div");
+        // newBubbleContainer.classList.add(
+        //   "chat-bubble-container",
+        //   "user-bubble-container"
+        // );
+        // newBubbleContainer.innerHTML =
+        //   '<div class="profile-picture"><img src="/images/user.png" height="100%" /></div>';
 
-        let newBubble = document.createElement("div");
-        newBubble.classList.add("chat-bubble", "user-bubble");
-        // newBubble.innerHTML = userInput.value;
-        newBubbleContainer.appendChild(newBubble);
-        // chatArea.appendChild(newBubbleContainer);
+        // let newBubble = document.createElement("div");
+        // newBubble.classList.add("chat-bubble", "user-bubble");
+        // // newBubble.innerHTML = userInput.value;
+        // newBubbleContainer.appendChild(newBubble);
+        // // chatArea.appendChild(newBubbleContainer);
         // userInput.value = ""; // Clear the input vield
 
         const randomInt = getRandomInt(data.length);
-        const meows = data[randomInt].text.replaceAll("{name}", "93");
-        // const meows = Miao.encode(data[randomInt].text, { calls: "嘎" });
-        const file = data[randomInt].file;
+        let item = data[randomInt];
+        if (data.length === 0) {
+          item = { text: "都给你夸完了，你已经可以入院了" };
+        }
+        const meows = item.text.replaceAll("{name}", "93");
+        const file = item.file;
+        data.splice(randomInt, 1);
 
         let newBubble2Container = document.createElement("div");
         newBubble2Container.classList.add(
@@ -267,20 +272,19 @@
       sendBtn.addEventListener("click", handleSubmit); // Handle clicks to the submit button
       // form.addEventListener("submit", handleSubmit); // Handle default submit (e.g. pressing enter)
 
-      const infoText = [
-        "不会真的有人是93的gachi吧，不会吧，不会吧",
-        // "关注<a href='https://space.bilibili.com/3493139945884106' target='_blank'>雪糕</a>喵，关注<a href='https://space.bilibili.com/3493139945884106' target='_blank'>雪糕</a>谢谢喵！",
-        // "本项目纯属整活，如果有宝宝不懂糕语的，可以在右下角进行翻译哦",
-        // "大家也要关注我做的另一个雪糕麻麻的<a href='https://www.icheese.club/' target='_blank'>专属网页</a>喵，虽然还没做完",
-        // "大家可以关注这个<a href='https://github.com/renmu123/CheeseGPT/' target='_blank'>项目</a>，贡献更多逆天的雪糕麻麻",
-        // "也要关注<a href='https://space.bilibili.com/10995238' target='_blank'>暮色312</a>，之后会带来更多整活的",
-      ]; // Lines of the information chat
-
       infoBtn.addEventListener("click", handleInfoClick); // Handle clicks to the info link
 
-      function handleInfoClick() {
-        // Create a chat-bubble-container
-
+      function handleInfoClick(init = false) {
+        let infoText = ["我就是93的gachi，嘶哈，嘶哈，我要当93姐姐的狗。"];
+        if (init === true) {
+          infoText = [
+            "不会真的有人是93的gachi吧，不会吧，不会吧。",
+            "关注<a href='https://space.bilibili.com/1133258171' target='_blank'>洛瑞娅EIF93</a>，为大家带来更多阴间整活。",
+            // "本项目纯属整活，如果有宝宝不懂糕语的，可以在右下角进行翻译哦",
+            "大家可以为这个<a href='https://github.com/renmu123/anti93' target='_blank'>项目</a>贡献更多发癫。",
+            "你也可以关注<a href='https://space.bilibili.com/10995238' target='_blank'>暮色312</a>，之后也会带来更多整活。",
+          ];
+        }
         let newBubble3Container = document.createElement("div");
         newBubble3Container.classList.add(
           "chat-bubble-container",
@@ -319,7 +323,7 @@
         createLine(0); // Start creating the respone with the first line
       }
 
-      infoBtn.click(); // Simulate a click on the info button, to show the info text
+      handleInfoClick(true);
     </script>
   </body>
 </html>
