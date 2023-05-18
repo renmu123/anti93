@@ -47,14 +47,12 @@ body {
   position: relative;
   z-index: 1;
 }
-.header::after {
-  content: "";
+.flower {
   background: url("/images/flower.png") no-repeat center center;
   background-size: contain;
   height: 100px;
   width: 100px;
   position: absolute;
-  /* z-index: -1; */
   right: -50px;
   top: 0;
   animation: rotate 1.5s linear infinite;
@@ -66,6 +64,9 @@ body {
   100% {
     transform: rotate(360deg);
   }
+}
+.rotate {
+  animation: rotate 1s linear infinite;
 }
 
 .header h1 {

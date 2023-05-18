@@ -23,9 +23,9 @@
   <body>
     <div id="container">
       <div class="header">
-        <!-- <div></div> -->
         <h1>我为93发癫</h1>
         <p>真无语，滚啊</p>
+        <span class="flower" id="flower"></span>
       </div>
       <div id="chatcontainer">
         <div id="chat"></div>
@@ -77,12 +77,12 @@
         </div>
         <div class="modal-body">
           <div style="display: flex">
-            <input type="text" class="modal-input" placeholder="请输入糕语" />
+            <input type="text" class="modal-input" placeholder="请输入吴语" />
             <button class="modal-btn">翻译成人话</button>
           </div>
           <div style="display: flex; margin-top: 20px">
             <input type="text" class="modal-input-2" placeholder="请输入人话" />
-            <button class="modal-btn-2">翻译成糕语</button>
+            <button class="modal-btn-2">翻译成吴语</button>
           </div>
           <p class="modal-output"></p>
           <button class="copy-btn" style="display: none">复制</button>
@@ -90,11 +90,8 @@
       </div>
     </div>
     <script>
-      // Get the modal
       var modal = document.querySelector(".modal");
-      // Get the button that opens the modal
       var btn = document.querySelector(".translate-btn");
-      // Get the <span> element that closes the modal
       var span = document.querySelector(".close");
       // When the user clicks the button, open the modal
       // btn.onclick = function () {
@@ -119,7 +116,7 @@
         const output = document.querySelector(".modal-output");
         const text = input.value;
         if (text === "") {
-          output.innerHTML = "你还没有输入糕语喵";
+          output.innerHTML = "你还没有输入吴语喵";
           copyBtn.style.display = "none";
 
           return;
@@ -129,7 +126,7 @@
           output.innerHTML = meows;
           copyBtn.style.display = "block";
         } else {
-          output.innerHTML = "你输入的不是糕语喵";
+          output.innerHTML = "你输入的不是吴语喵";
           copyBtn.style.display = "none";
         }
       });
@@ -280,10 +277,9 @@
           infoText = [
             "不会真的有人是93的gachi吧，不会吧，不会吧。",
             "关注<a href='https://space.bilibili.com/1133258171' target='_blank'>洛瑞娅EIF93</a>，为大家带来更多阴间整活。",
-            // "本项目纯属整活，如果有宝宝不懂糕语的，可以在右下角进行翻译哦",
             "大家可以为这个<a href='https://github.com/renmu123/anti93' target='_blank'>项目</a>贡献更多发癫。",
             "你也可以关注<a href='https://space.bilibili.com/10995238' target='_blank'>暮色312</a>，之后也会带来更多整活。",
-            "<img src='/images/pig.jpg' height='200'>",
+            "<img src='/images/pig.jpg' height='200' id='pig'>",
           ];
         }
         let newBubble3Container = document.createElement("div");
@@ -325,6 +321,16 @@
       }
 
       handleInfoClick(true);
+
+      // 点击id=flower后id=pig图像会旋转飞走
+      const flower = document.getElementById("flower");
+      flower.addEventListener("click", () => {
+        const pig = document.getElementById("pig");
+        pig.classList.add("rotate");
+        setTimeout(() => {
+          pig.classList.remove("rotate");
+        }, 5000);
+      });
     </script>
   </body>
 </html>
