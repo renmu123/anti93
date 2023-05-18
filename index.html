@@ -212,7 +212,7 @@
         const randomInt = getRandomInt(data.length);
         let item = data[randomInt];
         if (data.length === 0) {
-          item = { text: "都给你夸完了，你已经可以入院了" };
+          item = { text: "都给你夸完了，你已经可以出院了" };
         }
         const meows = item.text.replaceAll("{name}", "93");
         const file = item.file;
@@ -283,6 +283,7 @@
             // "本项目纯属整活，如果有宝宝不懂糕语的，可以在右下角进行翻译哦",
             "大家可以为这个<a href='https://github.com/renmu123/anti93' target='_blank'>项目</a>贡献更多发癫。",
             "你也可以关注<a href='https://space.bilibili.com/10995238' target='_blank'>暮色312</a>，之后也会带来更多整活。",
+            "<img src='/images/pig.jpg' height='200'>",
           ];
         }
         let newBubble3Container = document.createElement("div");
