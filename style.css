@@ -118,10 +118,12 @@ body {
 .profile-picture {
   width: 30px;
   height: 30px;
-}
-
-.profile-picture img {
   border-radius: 5px;
+  background: url("/images/avatar.jpg");
+  background-size: cover;
+}
+.profile-picture:hover {
+  background-image: url("/images/pig2.jpg");
 }
 
 .chat-bubble {
