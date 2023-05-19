@@ -25,7 +25,7 @@
       <div class="header">
         <h1>我为93发癫</h1>
         <p>真无语，滚啊</p>
-        <span class="flower" id="flower"></span>
+        <span class="flower" id="flower" title="点击试试看"></span>
       </div>
       <div id="chatcontainer">
         <div id="chat"></div>
@@ -220,8 +220,7 @@
           "chat-bubble-container",
           "chat-gpt-bubble-container"
         );
-        newBubble2Container.innerHTML =
-          '<div class="profile-picture"><img src="/images/avatar.jpg" height="100%" /></div>';
+        newBubble2Container.innerHTML = '<div class="profile-picture"></div>';
 
         let newBubble2 = document.createElement("div");
         newBubble2.classList.add("chat-bubble", "chat-gpt-bubble");
