@@ -23,7 +23,7 @@
   <body>
     <div id="container">
       <div class="header">
-        <h1>我为93发癫</h1>
+        <h1>我为93祈福🕯️🕯️🕯️</h1>
         <p class="sub-title">
           <svg
             style="cursor: pointer"
@@ -43,7 +43,11 @@
               p-id="2349"
             ></path></svg
           >真无语，滚啊
-          <audio src="/audio/死夹子.MP3" style="display: none;" id="titleAudio"></audio>
+          <audio
+            src="/audio/死夹子.MP3"
+            style="display: none"
+            id="titleAudio"
+          ></audio>
         </p>
         <span class="flower" id="flower" title="点击试试看"></span>
       </div>
@@ -352,14 +356,16 @@
         }, 5000);
       });
 
-      document.getElementById("titleAudioPlay").addEventListener("click", () => {
-        const audio = document.getElementById("titleAudio");
-        if(audio.paused){
-          audio.play();
-        }else{
-          audio.pause();
-        }
-      });
+      document
+        .getElementById("titleAudioPlay")
+        .addEventListener("click", () => {
+          const audio = document.getElementById("titleAudio");
+          if (audio.paused) {
+            audio.play();
+          } else {
+            audio.pause();
+          }
+        });
     </script>
   </body>
 </html>
